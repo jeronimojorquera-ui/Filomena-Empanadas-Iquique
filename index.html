@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Doña Filomena · Tradición y Sabor en Península, Iquique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ─── TOKENS ─────────────────────────── */
+:root {
+  --rojo:       #c0392b;
+  --rojo-osc:   #96281b;
+  --terracota:  #c85a3a;
+  --crema:      #fdf8f2;
+  --crema-2:    #f5e6cc;
+  --crema-3:    #e8d0a9;
+  --madera:     #8b5e3c;
+  --madera-cl:  #b07d52;
+  --oro:        #d4a843;
+  --oro-cl:     #f0c864;
+  --oscuro:     #1a0d08;
+  --texto:      #2c1810;
+  --texto-s:    #6b4226;
+  --borde:      rgba(139,94,60,.15);
+  --sh-sm:      0 2px 14px rgba(30,20,16,.08);
+  --sh-md:      0 6px 28px rgba(30,20,16,.13);
+  --sh-lg:      0 16px 48px rgba(30,20,16,.18);
+  --r-sm:8px; --r-md:14px; --r-lg:20px; --r-xl:28px;
+}
+
+/* ─── RESET ──────────────────────────── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;background:var(--crema);color:var(--texto);overflow-x:hidden}
+img{display:block;max-width:100%}
+a{text-decoration:none}
+button{cursor:pointer;font-family:'Poppins',sans-serif}
+
+/* ─── HEADER ─────────────────────────── */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:14px 22px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .35s,box-shadow .35s,border-color .35s;
+}
+.header.scrolled{
+  background:rgba(253,248,242,.97);
+  backdrop-filter:blur(16px);
+  box-shadow:var(--sh-sm);
+  border-bottom:1px solid var(--borde);
+}
+.logo-wrap{display:flex;flex-direction:column;line-height:1}
+.logo-nombre{
+  font-family:'Lora',serif;font-size:21px;font-weight:700;
+  letter-spacing:.02em;transition:color .3s;
+}
+.header:not(.scrolled) .logo-nombre{color:#fff}
+.header.scrolled    .logo-nombre{color:var(--rojo)}
+.logo-sub{
+  font-family:'Poppins',sans-serif;
+  font-size:8.5px;font-weight:400;letter-spacing:.22em;
+  text-transform:uppercase;margin-top:2px;transition:color .3s;
+}
+.header:not(.scrolled) .logo-sub{color:rgba(255,255,255,.6)}
+.header.scrolled    .logo-sub{color:var(--madera-cl)}
+.header-right{display:flex;align-items:center;gap:10px}
+.btn-nav-menu{
+  padding:9px 18px;border-radius:4px;
+  font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  transition:all .2s;border:1.5px solid rgba(255,255,255,.5);color:#fff;background:transparent;
+}
+.header.scrolled .btn-nav-menu{border-color:var(--rojo);color:var(--rojo)}
+.btn-nav-menu:hover{background:var(--rojo);border-color:var(--rojo);color:#fff}
+.cart-btn-hdr{
+  position:relative;background:var(--rojo);color:#fff;
+  width:44px;height:44px;border-radius:var(--r-md);border:none;font-size:18px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 3px 14px rgba(192,57,43,.4);transition:background .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.cart-btn-hdr:active{background:var(--rojo-osc)}
+.cart-badge{
+  position:absolute;top:-6px;right:-6px;
+  background:var(--oro);color:#fff;
+  font-size:10px;font-weight:700;width:19px;height:19px;border-radius:50%;
+  display:none;align-items:center;justify-content:center;
+  border:2px solid var(--crema);
+}
+
+/* ─── HERO ───────────────────────────── */
+.hero{
+  min-height:100vh;position:relative;
+  display:flex;align-items:flex-end;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:url('filomena_foto_por_fuera.png');
+  background-size:cover;background-position:center 40%;
+  background-color:var(--oscuro);
+  filter:brightness(.78);
+  transform:scale(1.05);
+  animation:heroZoom 16s ease-out forwards;
+}
+@keyframes heroZoom{from{transform:scale(1.05)}to{transform:scale(1)}}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    170deg,
+    rgba(26,13,8,.15) 0%,
+    rgba(26,13,8,.45) 40%,
+    rgba(26,13,8,.88) 100%
+  );
+}
+.hero-content{
+  position:relative;z-index:2;
+  padding:0 28px 64px;width:100%;max-width:580px;
+}
+.hero-eyebrow{
+  font-size:10px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--oro);font-weight:500;margin-bottom:14px;
+  opacity:0;animation:fadeUp .8s .3s forwards;
+}
+.hero-title{
+  font-family:'Lora',serif;
+  font-size:clamp(38px,9vw,58px);font-weight:700;line-height:1.05;
+  color:#fff;margin-bottom:10px;
+  opacity:0;animation:fadeUp .9s .5s forwards;
+}
+.hero-title em{font-style:italic;color:var(--oro-cl)}
+.hero-tagline{
+  font-size:clamp(14px,3.5vw,17px);font-weight:400;
+  color:rgba(255,255,255,.82);margin-bottom:26px;
+  letter-spacing:.01em;line-height:1.5;
+  opacity:0;animation:fadeUp .9s .7s forwards;
+}
+.hero-ctas{
+  display:flex;gap:12px;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .9s .9s forwards;
+}
+.btn-primario{
+  background:var(--rojo);color:#fff;
+  padding:15px 28px;border-radius:6px;border:none;
+  font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  box-shadow:0 4px 20px rgba(192,57,43,.5);
+  transition:background .2s,transform .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.btn-primario:hover{background:var(--rojo-osc);transform:translateY(-2px)}
+.btn-primario:active{transform:scale(.96)}
+.btn-outline-hero{
+  background:transparent;color:#fff;padding:15px 28px;border-radius:6px;
+  font-size:13px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+  border:1.5px solid rgba(255,255,255,.45);transition:all .2s;
+}
+.btn-outline-hero:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.8)}
+.hero-scroll{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  color:rgba(255,255,255,.45);font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px;
+  animation:bounce 2.5s infinite;
+}
+.hero-scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,rgba(255,255,255,.4),transparent)}
+
+/* ─── AWARDS STRIP ───────────────────── */
+.awards-strip{
+  background:var(--oscuro);
+  padding:0;overflow:hidden;
+}
+.awards-inner{
+  display:flex;flex-wrap:wrap;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.award-item{
+  flex:1;min-width:200px;
+  padding:18px 20px;
+  display:flex;align-items:center;gap:12px;
+  border-right:1px solid rgba(255,255,255,.07);
+}
+.award-item:last-child{border-right:none}
+.award-ico{font-size:26px;flex-shrink:0}
+.award-texts{display:flex;flex-direction:column}
+.award-main{
+  font-family:'Lora',serif;font-size:13.5px;font-weight:600;
+  font-style:italic;color:var(--oro-cl);line-height:1.3;
+}
+.award-from{font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+
+/* ─── AMBIENTE ───────────────────────── */
+.sec-ambiente{display:grid;grid-template-columns:1fr 1fr;min-height:420px}
+.amb-card{position:relative;overflow:hidden;min-height:320px}
+.amb-card img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .6s ease;display:block;
+}
+.amb-card:hover img{transform:scale(1.04)}
+.amb-card-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(26,13,8,.85) 0%,rgba(26,13,8,.2) 55%,transparent 100%);
+}
+.amb-card-txt{
+  position:absolute;bottom:0;left:0;right:0;padding:24px 22px;
+}
+.amb-card-ico{font-size:28px;margin-bottom:8px;display:block}
+.amb-card-txt h3{
+  font-family:'Lora',serif;font-size:22px;font-weight:700;
+  color:#fff;line-height:1.2;margin-bottom:6px;
+}
+.amb-card-txt p{font-size:12.5px;color:rgba(255,255,255,.72);line-height:1.55}
+
+/* ─── PROMO STRIP ────────────────────── */
+.promo-strip{
+  background:linear-gradient(135deg,var(--terracota),var(--rojo));
+  padding:18px 24px;
+  display:flex;align-items:center;justify-content:center;
+  gap:14px;flex-wrap:wrap;text-align:center;
+  position:relative;overflow:hidden;
+}
+.promo-strip::before{
+  content:'';position:absolute;inset:0;opacity:.07;
+  background-image:repeating-linear-gradient(-45deg,#fff 0,#fff 1px,transparent 1px,transparent 10px);
+}
+.promo-ico{font-size:24px;position:relative;z-index:1}
+.promo-txt{position:relative;z-index:1}
+.promo-txt strong{
+  display:block;font-family:'Lora',serif;
+  font-size:16px;font-weight:700;font-style:italic;color:#fff;
+}
+.promo-txt span{font-size:12px;color:rgba(255,255,255,.8)}
+.promo-badge{
+  background:#fff;color:var(--rojo);
+  font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  padding:7px 18px;border-radius:50px;
+  position:relative;z-index:1;
+  box-shadow:0 3px 12px rgba(0,0,0,.15);
+}
+
+/* ─── HISTORIA ───────────────────────── */
+.sec-historia{
+  display:grid;grid-template-columns:1fr 1fr;min-height:480px;
+}
+.hist-foto{position:relative;overflow:hidden;background:var(--oscuro)}
+.hist-foto img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.75)}
+.hist-foto-ov{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(192,57,43,.3) 0%,transparent 60%);
+}
+.hist-txt{
+  background:var(--oscuro);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:56px 44px;
+}
+.sec-label{
+  font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--oro);font-weight:600;margin-bottom:14px;
+  font-family:'Poppins',sans-serif;
+}
+.sec-titulo{
+  font-family:'Lora',serif;
+  font-size:clamp(30px,4.5vw,40px);font-weight:700;
+  color:#fff;line-height:1.12;margin-bottom:18px;
+}
+.sec-titulo em{font-style:italic;color:var(--oro-cl)}
+.hist-txt p{
+  font-size:13.5px;line-height:1.78;color:rgba(255,255,255,.58);
+  margin-bottom:14px;
+}
+.hist-stats{display:flex;gap:26px;flex-wrap:wrap;margin-top:8px}
+.stat-item{display:flex;flex-direction:column}
+.stat-num{
+  font-family:'Lora',serif;font-size:36px;font-weight:700;
+  color:var(--oro);line-height:1;
+}
+.stat-lbl{
+  font-size:10px;color:rgba(255,255,255,.42);
+  letter-spacing:.14em;text-transform:uppercase;margin-top:3px;
+}
+
+/* ─── PROMO CARD (pizza) ─────────────── */
+.sec-promo-card{
+  background:var(--crema-2);padding:48px 24px;
+}
+.promo-card-inner{
+  max-width:900px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border-radius:var(--r-lg);overflow:hidden;
+  box-shadow:var(--sh-lg);
+}
+.promo-card-img{
+  position:relative;min-height:280px;
+}
+.promo-card-img img{width:100%;height:100%;object-fit:cover;display:block}
+.promo-card-body{
+  background:var(--oscuro);
+  padding:36px 32px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.promo-card-body .sec-label{margin-bottom:12px}
+.promo-card-title{
+  font-family:'Lora',serif;
+  font-size:clamp(22px,3vw,28px);font-weight:700;
+  color:#fff;margin-bottom:16px;line-height:1.2;
+}
+.promo-card-title em{font-style:italic;color:var(--oro-cl)}
+.promo-card-list{list-style:none;margin-bottom:18px}
+.promo-card-list li{
+  font-size:13px;color:rgba(255,255,255,.65);
+  padding:5px 0;border-bottom:1px solid rgba(255,255,255,.07);
+  display:flex;align-items:flex-start;gap:8px;line-height:1.45;
+}
+.promo-card-list li span{color:var(--oro);font-size:14px;margin-top:1px}
+.promo-tag{
+  display:inline-block;
+  background:var(--rojo);color:#fff;
+  padding:8px 18px;border-radius:50px;
+  font-size:12px;font-weight:700;
+  box-shadow:0 3px 12px rgba(192,57,43,.35);
+}
+.promo-fine{
+  font-size:10px;color:rgba(255,255,255,.3);
+  margin-top:10px;line-height:1.5;
+}
+
+/* ─── CAFETERÍA ──────────────────────── */
+.sec-cafeteria{
+  display:grid;grid-template-columns:1fr 1fr;min-height:440px;
+}
+.caf-foto{position:relative;overflow:hidden}
+.caf-foto img{width:100%;height:100%;object-fit:cover;display:block}
+.caf-txt{
+  background:var(--crema-2);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:56px 44px;
+}
+.caf-txt .sec-titulo{color:var(--oscuro)}
+.caf-txt .sec-titulo em{color:var(--rojo)}
+.caf-txt p{
+  font-size:13.5px;line-height:1.75;color:var(--texto-s);margin-bottom:14px;
+}
+.caf-script{
+  font-family:'Dancing Script',cursive;
+  font-size:32px;color:var(--rojo);
+  margin-bottom:18px;line-height:1.1;
+}
+.caf-horario{
+  background:var(--crema-3);border-radius:var(--r-md);
+  padding:14px 18px;margin-top:4px;
+}
+.caf-horario strong{
+  display:block;font-size:12px;font-weight:600;
+  color:var(--madera);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;
+}
+.caf-horario p{font-size:13px;color:var(--texto-s);line-height:1.6;margin-bottom:0}
+
+/* ─── DELIVERY ANCHOR ────────────────── */
+.delivery-anchor{
+  background:var(--rojo);padding:44px 24px;
+  text-align:center;position:relative;overflow:hidden;
+}
+.delivery-anchor::before{
+  content:'';position:absolute;inset:0;opacity:.07;
+  background-image:repeating-linear-gradient(-45deg,#fff 0,#fff 1px,transparent 1px,transparent 10px);
+}
+.da-inner{position:relative;z-index:1}
+.da-title{
+  font-family:'Lora',serif;
+  font-size:clamp(26px,5.5vw,34px);font-weight:700;
+  color:#fff;margin-bottom:8px;line-height:1.1;
+}
+.da-title em{font-style:italic;color:var(--oro-cl)}
+.da-sub{font-size:13px;color:rgba(255,255,255,.72);margin-bottom:18px}
+.da-chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.da-chip{
+  background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.24);
+  color:rgba(255,255,255,.9);font-size:12px;font-weight:500;
+  padding:6px 14px;border-radius:50px;
+}
+.da-note{font-size:11px;color:rgba(255,255,255,.42)}
+
+/* ─── CAT NAV ────────────────────────── */
+.cat-nav{
+  position:sticky;top:0;z-index:190;background:#fff;
+  border-bottom:2px solid var(--borde);
+  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.cat-nav::-webkit-scrollbar{display:none}
+.cat-nav-inner{display:flex;gap:6px;padding:10px 18px;white-space:nowrap}
+.pill{
+  flex-shrink:0;background:transparent;border:1.5px solid var(--borde);
+  color:var(--texto-s);padding:6px 14px;border-radius:50px;
+  font-size:12.5px;font-weight:500;transition:all .18s;
+  -webkit-tap-highlight-color:transparent;
+}
+.pill.active{background:var(--rojo);border-color:var(--rojo);color:#fff;font-weight:600}
+
+/* ─── MENU SECTIONS ──────────────────── */
+.msec{padding:24px 0 8px}
+.msec-head{padding:0 18px 14px}
+.msec-title{
+  font-family:'Lora',serif;font-size:24px;font-weight:700;
+  color:var(--oscuro);display:flex;align-items:center;gap:10px;line-height:1;
+}
+.msec-sub{font-size:12px;color:var(--madera-cl);margin-top:3px}
+
+/* HERO ROW (destacados cards) */
+.hero-row{
+  display:flex;gap:12px;overflow-x:auto;
+  padding:0 18px 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.hero-row::-webkit-scrollbar{display:none}
+.hcard{
+  flex:0 0 178px;background:#fff;border-radius:var(--r-lg);
+  box-shadow:var(--sh-md);overflow:hidden;cursor:pointer;
+  transition:transform .15s;-webkit-tap-highlight-color:transparent;
+}
+.hcard:active{transform:scale(.96)}
+.hcard-visual{
+  height:115px;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--crema-2),var(--crema-3));
+  display:flex;align-items:center;justify-content:center;font-size:48px;
+}
+/* For cards that have a real photo */
+.hcard-visual.has-photo{font-size:0}
+.hcard-visual.has-photo img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;
+}
+.hcard-badge{
+  position:absolute;top:8px;left:8px;
+  background:var(--oro);color:#fff;
+  font-size:8.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+  padding:3px 8px;border-radius:50px;z-index:1;
+}
+.hcard-body{padding:10px 12px 13px}
+.hcard-name{
+  font-family:'Lora',serif;font-size:15px;font-weight:600;
+  color:var(--texto);line-height:1.22;margin-bottom:3px;
+}
+.hcard-desc{font-size:11px;color:var(--madera-cl);margin-bottom:9px;line-height:1.4}
+.hcard-foot{display:flex;align-items:center;justify-content:space-between}
+.hcard-price{font-size:17px;font-weight:700;color:var(--rojo)}
+
+/* PRODUCT ROWS */
+.plist{display:flex;flex-direction:column;gap:8px;padding:0 18px}
+.prow{
+  background:#fff;border-radius:var(--r-md);padding:12px 13px;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:var(--sh-sm);cursor:pointer;transition:transform .12s;
+  -webkit-tap-highlight-color:transparent;
+}
+.prow:active{transform:scale(.97)}
+.prow-ico{
+  width:52px;height:52px;flex-shrink:0;
+  background:var(--crema-2);border-radius:var(--r-sm);
+  display:flex;align-items:center;justify-content:center;font-size:26px;
+  overflow:hidden;
+}
+.prow-ico img{width:100%;height:100%;object-fit:cover}
+.prow-info{flex:1;min-width:0}
+.prow-name{font-weight:600;font-size:13.5px;color:var(--texto);line-height:1.25;margin-bottom:2px}
+.prow-desc{font-size:11.5px;color:var(--madera-cl);line-height:1.35}
+.prow-right{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.prow-price{font-weight:700;font-size:14.5px;color:var(--rojo)}
+.cbadge{
+  background:var(--crema-2);border:1px solid var(--oro);
+  color:var(--madera);font-size:9.5px;font-weight:600;
+  padding:2px 7px;border-radius:50px;display:inline-block;margin-top:2px;
+}
+
+/* ADD BUTTONS */
+.btn-add,.btn-add-h{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--rojo);color:#fff;border:none;font-size:22px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 10px rgba(192,57,43,.32);transition:background .15s,transform .1s;
+  -webkit-tap-highlight-color:transparent;
+}
+.btn-add:active,.btn-add-h:active{background:var(--rojo-osc);transform:scale(.88)}
+
+.sep{height:10px;background:var(--crema-2);margin:8px 0}
+
+/* ─── FLOAT BAR ──────────────────────── */
+.float-bar{
+  position:fixed;bottom:0;left:0;right:0;
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom,0));
+  background:rgba(253,248,242,.97);backdrop-filter:blur(12px);
+  border-top:1.5px solid var(--borde);
+  z-index:195;display:none;box-shadow:0 -4px 22px rgba(30,20,16,.1);
+}
+.float-bar.on{display:block}
+.float-bar-btn{
+  width:100%;background:var(--rojo);color:#fff;border:none;
+  padding:15px 18px;border-radius:var(--r-md);
+  font-size:14.5px;font-weight:600;
+  display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 4px 18px rgba(192,57,43,.38);-webkit-tap-highlight-color:transparent;
+}
+.fb-left{display:flex;align-items:center;gap:9px}
+.fb-count{
+  background:rgba(255,255,255,.22);width:25px;height:25px;border-radius:50%;
+  font-size:11.5px;font-weight:700;display:flex;align-items:center;justify-content:center;
+}
+.fb-total{font-family:'Lora',serif;font-size:21px;font-weight:700}
+
+/* ─── OVERLAY ────────────────────────── */
+.overlay{
+  position:fixed;inset:0;background:rgba(26,13,8,.6);
+  z-index:300;opacity:0;pointer-events:none;transition:opacity .28s;
+}
+.overlay.on{opacity:1;pointer-events:all}
+
+/* ─── CART DRAWER ────────────────────── */
+.cart-drawer{
+  position:fixed;bottom:0;left:0;right:0;background:var(--crema);
+  border-radius:var(--r-xl) var(--r-xl) 0 0;z-index:301;
+  max-height:88vh;display:flex;flex-direction:column;
+  transform:translateY(100%);transition:transform .34s cubic-bezier(.34,1.38,.64,1);
+}
+.cart-drawer.on{transform:translateY(0)}
+.d-pill{width:38px;height:4px;background:var(--crema-3);border-radius:4px;margin:13px auto 0;flex-shrink:0}
+.cart-hdr{
+  padding:14px 20px 13px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1.5px solid var(--borde);
+}
+.cart-hdr-title{font-family:'Lora',serif;font-size:24px;font-weight:700;color:var(--texto)}
+.btn-close{
+  background:var(--crema-2);border:none;width:34px;height:34px;border-radius:50%;
+  font-size:17px;color:var(--texto-s);display:flex;align-items:center;justify-content:center;
+  -webkit-tap-highlight-color:transparent;
+}
+.cart-body{flex:1;overflow-y:auto;padding:10px 20px}
+.cart-empty{text-align:center;padding:40px 0;color:var(--madera-cl)}
+.cart-empty-ico{font-size:52px;margin-bottom:12px}
+.cart-empty p{font-size:14px;line-height:1.55}
+.cart-item{
+  display:flex;align-items:center;gap:12px;
+  padding:11px 0;border-bottom:1px solid var(--crema-2);
+}
+.ci-ico{
+  font-size:24px;width:42px;height:42px;background:var(--crema-2);
+  border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  overflow:hidden;
+}
+.ci-ico img{width:100%;height:100%;object-fit:cover}
+.ci-inf{flex:1;min-width:0}
+.ci-nm{font-weight:600;font-size:13px;color:var(--texto);line-height:1.3}
+.ci-pr{font-size:12.5px;color:var(--madera-cl);margin-top:2px}
+.btn-del{background:none;border:none;color:#c0392b;font-size:18px;padding:4px;-webkit-tap-highlight-color:transparent}
+.cart-ftr{
+  flex-shrink:0;padding:14px 20px calc(24px + env(safe-area-inset-bottom,0));
+  border-top:1.5px solid var(--borde);background:var(--crema);
+}
+.addr-lbl{
+  display:block;font-size:11px;font-weight:600;
+  color:var(--madera-cl);text-transform:uppercase;letter-spacing:.9px;margin-bottom:7px;
+}
+.addr-inp{
+  width:100%;border:1.5px solid var(--borde);border-radius:var(--r-md);
+  padding:11px 13px;font-family:'Poppins',sans-serif;
+  font-size:13.5px;color:var(--texto);resize:none;outline:none;
+  min-height:66px;background:#fff;transition:border-color .2s;margin-bottom:14px;
+}
+.addr-inp:focus{border-color:var(--rojo)}
+.total-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
+.total-lbl{font-size:13.5px;color:var(--madera-cl)}
+.total-amt{font-family:'Lora',serif;font-size:29px;font-weight:700;color:var(--rojo)}
+.wa-btn{
+  width:100%;background:#25D366;color:#fff;border:none;
+  padding:16px 18px;border-radius:var(--r-md);
+  font-size:15.5px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  box-shadow:0 4px 16px rgba(37,211,102,.28);transition:background .18s;
+  -webkit-tap-highlight-color:transparent;
+}
+.wa-btn:active{background:#1da855}
+
+/* ─── UPSELL MODAL ───────────────────── */
+.modal-ov{
+  position:fixed;inset:0;background:rgba(26,13,8,.65);
+  z-index:400;display:flex;align-items:flex-end;
+  opacity:0;pointer-events:none;transition:opacity .22s;
+}
+.modal-ov.on{opacity:1;pointer-events:all}
+.usheet{
+  background:var(--crema);width:100%;
+  border-radius:var(--r-xl) var(--r-xl) 0 0;
+  padding:0 0 calc(28px + env(safe-area-inset-bottom,0));
+  transform:translateY(60px);transition:transform .3s cubic-bezier(.34,1.45,.64,1);
+  overflow:hidden;
+}
+.modal-ov.on .usheet{transform:translateY(0)}
+
+/* Drink photos header */
+.upsell-photos{display:grid;grid-template-columns:1fr 1fr;height:140px;margin-bottom:0}
+.upsell-photo{position:relative;overflow:hidden}
+.upsell-photo img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:brightness(.75);
+  transition:filter .3s;
+}
+.upsell-photo:hover img{filter:brightness(.85)}
+.upsell-photo-ov{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(26,13,8,.7) 0%,transparent 60%);
+}
+.upsell-photo-lbl{
+  position:absolute;bottom:10px;left:0;right:0;text-align:center;
+  font-family:'Dancing Script',cursive;
+  font-size:18px;color:#fff;font-weight:700;
+  text-shadow:0 2px 8px rgba(0,0,0,.5);
+}
+
+.u-body{padding:0 20px}
+.u-hdr{padding:16px 0 12px;text-align:center;border-bottom:1px solid var(--borde);margin-bottom:14px}
+.u-hdr h3{font-family:'Lora',serif;font-size:24px;font-weight:700;color:var(--texto);margin-bottom:3px}
+.u-hdr p{font-size:13px;color:var(--madera-cl)}
+.u-opts{
+  display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;margin-bottom:16px;scrollbar-width:none;
+}
+.u-opts::-webkit-scrollbar{display:none}
+.uopt{
+  flex:0 0 124px;border:2px solid var(--borde);border-radius:var(--r-md);
+  background:#fff;padding:13px 10px;text-align:center;cursor:pointer;
+  transition:all .18s;-webkit-tap-highlight-color:transparent;
+}
+.uopt.sel{border-color:var(--rojo);background:rgba(192,57,43,.05)}
+.uopt-ico{font-size:30px;margin-bottom:7px}
+.uopt-nm{font-weight:600;font-size:11.5px;margin-bottom:4px;line-height:1.25;color:var(--texto)}
+.uopt-pr{font-size:13px;font-weight:700;color:var(--rojo)}
+.u-btns{display:flex;gap:10px}
+.btn-skip{
+  flex:1;background:var(--crema-2);color:var(--madera-cl);border:none;
+  padding:14px;border-radius:var(--r-md);font-size:14px;font-weight:600;
+  -webkit-tap-highlight-color:transparent;
+}
+.btn-ok{
+  flex:2;background:var(--rojo);color:#fff;border:none;
+  padding:14px;border-radius:var(--r-md);font-size:14px;font-weight:700;
+  box-shadow:0 4px 14px rgba(192,57,43,.3);-webkit-tap-highlight-color:transparent;
+}
+.btn-ok:active{background:var(--rojo-osc)}
+
+/* ─── FOOTER ─────────────────────────── */
+.footer{background:var(--oscuro);padding:40px 24px 30px}
+.footer-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px;
+  margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:28px;
+}
+.footer-brand .fn{
+  font-family:'Lora',serif;font-size:22px;font-weight:700;
+  color:var(--crema);display:block;margin-bottom:3px;
+}
+.footer-brand .fs{
+  font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--madera-cl);display:block;margin-bottom:10px;
+}
+.footer-brand p{font-size:12px;color:rgba(255,255,255,.38);line-height:1.65}
+.foot-col h5{
+  font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--oro);margin-bottom:10px;font-weight:600;
+}
+.foot-col p,.foot-col a{
+  display:block;font-size:12px;color:rgba(255,255,255,.48);
+  line-height:1.85;transition:color .2s;
+}
+.foot-col a:hover{color:var(--oro)}
+.footer-awards{
+  padding:16px 0 0;
+  display:flex;gap:16px;flex-wrap:wrap;
+}
+.foot-award{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--r-sm);padding:8px 14px;
+  display:flex;align-items:center;gap:8px;
+}
+.foot-award-ico{font-size:16px}
+.foot-award-txt{font-size:10px;color:rgba(255,255,255,.45);line-height:1.4}
+.foot-award-txt strong{display:block;color:var(--oro-cl);font-size:10.5px}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:8px;
+}
+.footer-bottom p{font-size:11px;color:rgba(255,255,255,.22)}
+
+/* ─── TOAST ──────────────────────────── */
+.toast{
+  position:fixed;top:78px;left:50%;
+  transform:translateX(-50%) translateY(-8px);
+  background:var(--oscuro);color:#fff;padding:9px 20px;border-radius:50px;
+  font-size:13px;font-weight:500;z-index:600;opacity:0;pointer-events:none;
+  transition:opacity .2s,transform .2s;white-space:nowrap;box-shadow:var(--sh-md);
+}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ─── ANIMATIONS ──────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+.fade-up{opacity:0;transform:translateY(26px);transition:opacity .75s,transform .75s}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* ─── RESPONSIVE ─────────────────────── */
+@media(max-width:680px){
+  .sec-ambiente,.sec-historia,.sec-cafeteria{grid-template-columns:1fr}
+  .hist-foto,.caf-foto{min-height:220px}
+  .hist-txt,.caf-txt{padding:34px 22px}
+  .promo-card-inner{grid-template-columns:1fr}
+  .promo-card-img{min-height:180px}
+  .footer-top{grid-template-columns:1fr;gap:22px}
+  .awards-inner{flex-direction:column}
+  .award-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
+  .hero-content{padding:0 22px 56px}
+  .hero-title{font-size:34px}
+  .btn-nav-menu{display:none}
+  .amb-card{min-height:240px}
+}
+.spacer{height:90px}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="header" id="header">
+  <div class="logo-wrap">
+    <span class="logo-nombre">Doña Filomena</span>
+    <span class="logo-sub">Pizzería · Restaurant · Bar</span>
+  </div>
+  <div class="header-right">
+    <a href="#menu-delivery" class="btn-nav-menu">Pedir Delivery</a>
+    <button class="cart-btn-hdr" onclick="openCart()" aria-label="Ver carrito">
+      🛒 <span class="cart-badge" id="badge">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Península de Cavancha · Iquique · Desde 2005</p>
+    <h1 class="hero-title">La Gran Casa<br><em>Iquiqueña</em></h1>
+    <p class="hero-tagline">Tradición y Sabor en Península, Iquique</p>
+    <div class="hero-ctas">
+      <button class="btn-primario" onclick="document.getElementById('menu-delivery').scrollIntoView({behavior:'smooth'})">
+        🛒 Ver Menú y Pedir
+      </button>
+      <a href="#historia" class="btn-outline-hero">Nuestra Historia</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div>Descubre</div>
+</section>
+
+<!-- ═══ AWARDS STRIP ═══ -->
+<div class="awards-strip">
+  <div class="awards-inner">
+    <div class="award-item">
+      <span class="award-ico">🏆</span>
+      <div class="award-texts">
+        <span class="award-main">Mejor Empanada de Iquique</span>
+        <span class="award-from">Premio Seremi de Agricultura · Tarapacá</span>
+      </div>
+    </div>
+    <div class="award-item">
+      <span class="award-ico">⭐</span>
+      <div class="award-texts">
+        <span class="award-main">Travellers' Choice</span>
+        <span class="award-from">TripAdvisor · Top 10% en Iquique</span>
+      </div>
+    </div>
+    <div class="award-item">
+      <span class="award-ico">🌟</span>
+      <div class="award-texts">
+        <span class="award-main">#12 de 236 Restaurantes</span>
+        <span class="award-from">TripAdvisor Iquique · 613 reseñas verificadas</span>
+      </div>
+    </div>
+    <div class="award-item">
+      <span class="award-ico">🚚</span>
+      <div class="award-texts">
+        <span class="award-main">Delivery GRATIS en Península</span>
+        <span class="award-from">Toda la semana · Sin comisiones de terceros</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ AMBIENTE ═══ -->
+<section class="sec-ambiente">
+  <div class="amb-card">
+    <img src="personas_comiendo.png" alt="Clientes disfrutando en la terraza de Doña Filomena" loading="lazy">
+    <div class="amb-card-overlay"></div>
+    <div class="amb-card-txt">
+      <span class="amb-card-ico">🌊</span>
+      <h3>Vive la experiencia<br>Filomena</h3>
+      <p>Terraza con vista, música en vivo, pizzas a la piedra, cócteles de autor y el ambiente único de Cavancha.</p>
+    </div>
+  </div>
+  <div class="amb-card">
+    <img src="niños_y_mama_jugando_en_juegos_.png" alt="Zona infantil Doña Filomena" loading="lazy">
+    <div class="amb-card-overlay"></div>
+    <div class="amb-card-txt">
+      <span class="amb-card-ico">👨‍👩‍👧‍👦</span>
+      <h3>Zona Infantil<br>Gratuita</h3>
+      <p>Piscina de pelotas y juegos supervisados para que los más pequeños también la pasen increíble.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROMO STRIP ═══ -->
+<div class="promo-strip">
+  <span class="promo-ico">🚚</span>
+  <div class="promo-txt">
+    <strong>Si estás en Península, el delivery es GRATIS toda la semana</strong>
+    <span>Pedido directo, sin comisiones de plataformas externas</span>
+  </div>
+  <div class="promo-badge">¡GRATIS!</div>
+</div>
+
+<!-- ═══ HISTORIA ═══ -->
+<section class="sec-historia" id="historia">
+  <div class="hist-foto">
+    <img src="personas_comiendo.png" alt="Ambiente Doña Filomena" loading="lazy">
+    <div class="hist-foto-ov"></div>
+  </div>
+  <div class="hist-txt fade-up">
+    <span class="sec-label">Nuestra Historia</span>
+    <h2 class="sec-titulo">Desde <em>2005</em>,<br>el alma de Iquique.</h2>
+    <p>Doña Filomena nació en la Península de Cavancha como un lugar de encuentro familiar. Nos hemos convertido en un símbolo gastronómico de Iquique, reconocidos por la abundancia y autenticidad de nuestra cocina nortina.</p>
+    <p>Somos el restaurante premiado con la <strong style="color:var(--oro-cl)">Mejor Empanada de Iquique</strong> por la Seremi de Agricultura de Tarapacá — porque la nuestra es tradicional, con carne picada real, la típica empanada chilena.</p>
+    <div class="hist-stats">
+      <div class="stat-item"><span class="stat-num">+20</span><span class="stat-lbl">Años de historia</span></div>
+      <div class="stat-item"><span class="stat-num">+200</span><span class="stat-lbl">Platos en carta</span></div>
+      <div class="stat-item"><span class="stat-num">25</span><span class="stat-lbl">Tipos de empanada</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROMO PIZZA CARD ═══ -->
+<div class="sec-promo-card">
+  <div class="promo-card-inner fade-up">
+    <div class="promo-card-img">
+      <img src="Captura_de_pantalla_2026-05-16_145834.png" alt="Promo pizza Doña Filomena" loading="lazy">
+    </div>
+    <div class="promo-card-body">
+      <span class="sec-label">Promoción Vigente</span>
+      <h3 class="promo-card-title">¿Ya viste<br><em>nuestras promos?</em></h3>
+      <ul class="promo-card-list">
+        <li><span>🍕</span>Por la compra de 1 pizza familiar</li>
+        <li><span>🥟</span>O sobre $20.000 en sándwiches y empanadas</li>
+        <li><span>🎁</span><strong style="color:var(--oro-cl)">Te llevas una bebida de 1.5 L gratis</strong></li>
+      </ul>
+      <span class="promo-tag">¡Solo pedido directo!</span>
+      <p class="promo-fine">Válido Lun–Dom por pedido telefónico solo para llevar. No acumulable. No aplica en PedidosYa ni Uber Eats.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CAFETERÍA ═══ -->
+<section class="sec-cafeteria fade-up">
+  <div class="caf-foto">
+    <img src="cafeteria.png" alt="Hora del té en Doña Filomena" loading="lazy">
+  </div>
+  <div class="caf-txt">
+    <span class="sec-label">Hora del Té · Café · Postres</span>
+    <div class="caf-script">La hora del té<br>se disfruta aquí</div>
+    <h2 class="sec-titulo" style="font-size:clamp(24px,3.5vw,30px);margin-bottom:14px">Tortas, milhojas<br>y cheesecakes <em>artesanales</em></h2>
+    <p>Porciones generosas de torta, postres en copa y el mejor café de Cavancha. El plan perfecto para la tarde.</p>
+    <div class="caf-horario">
+      <strong>☕ Disponible todos los días</strong>
+      <p>Dom–Jue 12:00–00:00 · Vie–Sáb 12:00–01:00<br>Happy Hour cócteles Lun–Jue 13:00–23:00 hrs</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DELIVERY ANCHOR ═══ -->
+<div class="delivery-anchor" id="menu-delivery">
+  <div class="da-inner fade-up">
+    <h2 class="da-title">Pídenos a <em>domicilio</em></h2>
+    <p class="da-sub">El sabor de Doña Filomena en tu puerta. Sin comisiones de terceros.</p>
+    <div class="da-chips">
+      <span class="da-chip">🕐 30–45 min</span>
+      <span class="da-chip">🚚 Gratis en Península</span>
+      <span class="da-chip">📞 +56 9 9978 0334</span>
+      <span class="da-chip">✅ Pago contraentrega</span>
+    </div>
+    <p class="da-note">Pedido mínimo $5.000 · Cobertura Iquique y Cavancha</p>
+  </div>
+</div>
+
+<!-- ═══ CATEGORY NAV ═══ -->
+<nav class="cat-nav" id="catNav">
+  <div class="cat-nav-inner">
+    <button class="pill active" onclick="navTo('s-dest',this)">⭐ Destacados</button>
+    <button class="pill" onclick="navTo('s-ef',this)">🥟 Emp. Fritas</button>
+    <button class="pill" onclick="navTo('s-eh',this)">🫓 Emp. Horno</button>
+    <button class="pill" onclick="navTo('s-pesc',this)">🐟 Pescados</button>
+    <button class="pill" onclick="navTo('s-beb',this)">🥤 Jugos & Bebidas</button>
+    <button class="pill" onclick="navTo('s-cerv',this)">🍺 Cervezas</button>
+    <button class="pill" onclick="navTo('s-del',this)">🍹 Para Grupo</button>
+  </div>
+</nav>
+
+<!-- ═══ MENU ═══ -->
+<div id="s-dest">
+  <div class="msec">
+    <div class="msec-head">
+      <div class="msec-title">⭐ Más Pedidos</div>
+      <div class="msec-sub">Los favoritos de la temporada 2025–2026</div>
+    </div>
+    <div class="hero-row" id="heroRow"></div>
+  </div>
+</div>
+<div class="sep"></div>
+
+<div id="s-ef">
+  <div class="msec">
+    <div class="msec-head">
+      <div class="msec-title">🥟 Empanadas Fritas</div>
+      <div class="msec-sub">Premiadas · Rellenas a mano · Recién fritas</div>
+    </div>
+    <div class="plist" id="listEF"></div>
+  </div>
+</div>
+<div class="sep"></div>
+
+<div id="s-eh">
+  <div class="msec">
+    <div class="msec-head">
+      <div class="msec-title">🫓 Empanadas de Horno</div>
+      <div class="msec-sub">Doradas al horno · Masa suave · Las Sin Envidia incluidas</div>
+    </div>
+    <div class="plist" id="listEH"></div>
+  </div>
+</div>
+<div class="sep"></div>
+
+<div id="s-pesc">
+  <div class="msec">
+    <div class="msec-head">
+      <div class="msec-title">🐟 Pescados</div>
+      <div class="msec-sub">Del Pacífico · Con guarnición a elección</div>
+    </div>
+    <div class="plist" id="listPesc"></div>
+  </div>
+</div>
+<div class="sep"></div>
+
+<div id="s-beb">
+  <div class="msec">
+    <div class="msec-head">
+      <div class="msec-title">🥤 Jugos & Bebidas</div>
+      <div class="msec-sub">Naturales · Preparados al momento · Fríos</div>
+    </div>
+    <div class="plist" id="listBeb"></div>
+  </div>
+</div>
+<div class="sep"></div>
+
+<div id="s-cerv">
+  <div class="msec">
+    <div class="msec-head">
+      <div class="msec-title">🍺 Cervezas</div>
+      <div class="msec-sub">Artesanales y nacionales bien frías</div>
+    </div>
+    <div class="plist" id="listCerv"></div>
+  </div>
+</div>
+<div class="sep"></div>
+
+<div id="s-del">
+  <div class="msec">
+    <div class="msec-head">
+      <div class="msec-title">🍹 Para Grupo</div>
+      <div class="msec-sub">Jarras y litros · Exclusivo delivery</div>
+    </div>
+    <div class="plist" id="listDel"></div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="fn">Doña Filomena</span>
+      <span class="fs">Pizzería · Restaurant · Bar · Delivery</span>
+      <p>Tradición y Sabor en Península, Iquique. Un sitio de encuentro familiar en la Península de Cavancha. Más de 200 platos, 25 tipos de empanadas y la mejor barra de Iquique.</p>
+      <div class="footer-awards">
+        <div class="foot-award">
+          <span class="foot-award-ico">🏆</span>
+          <div class="foot-award-txt"><strong>Mejor Empanada de Iquique</strong>Seremi Agricultura · Tarapacá</div>
+        </div>
+        <div class="foot-award">
+          <span class="foot-award-ico">⭐</span>
+          <div class="foot-award-txt"><strong>Travellers' Choice</strong>TripAdvisor · Top 10%</div>
+        </div>
+        <div class="foot-award">
+          <span class="foot-award-ico">🌟</span>
+          <div class="foot-award-txt"><strong>#12 / 236 Restaurantes</strong>TripAdvisor Iquique · 613 reseñas</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h5>Visítanos</h5>
+      <p>Filomena Valenzuela 298</p>
+      <p>Península de Cavancha</p>
+      <p>Iquique, Chile</p>
+      <a href="tel:+56999780334">+56 9 9978 0334</a>
+    </div>
+    <div class="foot-col">
+      <h5>Horarios</h5>
+      <p>Dom–Jue 12:00–00:00</p>
+      <p>Vie–Sáb 12:00–01:00</p>
+      <p style="margin-top:6px;font-size:11px">Happy Hour cócteles<br>Lun–Jue 13:00–23:00 hrs</p>
+      <br>
+      <h5>Redes</h5>
+      <a href="https://instagram.com/donafilomenarestaurant" target="_blank">@donafilomenarestaurant</a>
+      <a href="https://menusonline.cl/filomena" target="_blank">Carta Digital</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Doña Filomena · Iquique · Desde 2005</p>
+    <p>Hecho con ❤️ en Cavancha</p>
+  </div>
+</footer>
+<div class="spacer"></div>
+
+<!-- ═══ FLOAT BAR ═══ -->
+<div class="float-bar" id="floatBar">
+  <button class="float-bar-btn" onclick="openCart()">
+    <div class="fb-left"><span>🛒 Ver pedido</span><span class="fb-count" id="fbCount">0</span></div>
+    <span class="fb-total" id="fbTotal">$0</span>
+  </button>
+</div>
+
+<!-- ═══ CART DRAWER ═══ -->
+<div class="overlay" id="ovCart" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Tu pedido">
+  <div class="d-pill"></div>
+  <div class="cart-hdr">
+    <div class="cart-hdr-title">🛒 Tu Pedido</div>
+    <button class="btn-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty"><div class="cart-empty-ico">🥟</div><p>Tu carrito está vacío.<br>¡Agrega algo delicioso!</p></div>
+  </div>
+  <div class="cart-ftr">
+    <label class="addr-lbl" for="addr">📍 Dirección de despacho</label>
+    <textarea class="addr-inp" id="addr" placeholder="Ej: Baquedano 1234, depto 5, Cavancha. Referencia: frente a Cruz Verde."></textarea>
+    <div class="total-row">
+      <span class="total-lbl">Total del pedido</span>
+      <span class="total-amt" id="cartTotal">$0</span>
+    </div>
+    <button class="wa-btn" onclick="enviarWA()">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Pedir por WhatsApp
+    </button>
+  </div>
+</div>
+
+<!-- ═══ UPSELL MODAL ═══ -->
+<div class="modal-ov" id="modalUp">
+  <div class="usheet">
+    <div class="upsell-photos">
+      <div class="upsell-photo">
+        <img src="bebestible.png" alt="Bebidas frescas Doña Filomena">
+        <div class="upsell-photo-ov"></div>
+        <span class="upsell-photo-lbl">Jugos naturales</span>
+      </div>
+      <div class="upsell-photo">
+        <img src="bebestible_2.png" alt="Cócteles Happy Hour Doña Filomena">
+        <div class="upsell-photo-ov"></div>
+        <span class="upsell-photo-lbl">Happy Hour</span>
+      </div>
+    </div>
+    <div class="u-body">
+      <div class="u-hdr">
+        <h3>¿Algo fresco? 🥤</h3>
+        <p>Acompaña tu pedido con una bebida</p>
+      </div>
+      <div class="u-opts" id="uOpts"></div>
+      <div class="u-btns">
+        <button class="btn-skip" onclick="closeUp()">No, gracias</button>
+        <button class="btn-ok" onclick="confirmUp()">¡Agregar al pedido!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ═══ JAVASCRIPT ═══ -->
+<script>
+const WA = "56999780334";
+
+const MENU = {
+  destacados:[
+    {id:"d1",nm:"Camarón-Queso Frita",      desc:"La empanada más pedida de la casa",        precio:4500, ico:"🦐",tipo:"emp",img:"empanadas_sin_envidia.png"},
+    {id:"d2",nm:"Reineta Frita o Plancha",  desc:"Con guarnición a elección",                precio:18500,ico:"🐟"},
+    {id:"d3",nm:"Pino Carne al Horno",      desc:"Receta de siempre · Masa dorada",          precio:3800, ico:"🫓",tipo:"emp",img:"empanadas_sin_envidia.png"},
+    {id:"d4",nm:"Jugo Natural Mango",       desc:"Mango o Maracuyá · Recién preparado",      precio:4200, ico:"🥭",img:"bebestible.png"},
+    {id:"d5",nm:"Cóctel de Temporada",      desc:"Happy Hour Lun–Jue 13:00–23:00",           precio:6500, ico:"🍹",img:"bebestible_2.png"},
+    {id:"d6",nm:"Ostión Pil Pil-Queso",     desc:"Empanada frita de ostiones al pil pil",    precio:5300, ico:"🥟",tipo:"emp",img:"empanadas_sin_envidia.png"},
+  ],
+  empFritas:[
+    {id:"ef1", nm:"Camarón-Queso",          desc:"",                                          precio:4500, ico:"🦐",tipo:"emp"},
+    {id:"ef2", nm:"Camarón al Pil Pil",     desc:"",                                          precio:4700, ico:"🦐",tipo:"emp"},
+    {id:"ef3", nm:"Loco-Queso",             desc:"",                                          precio:4500, ico:"🥟",tipo:"emp"},
+    {id:"ef4", nm:"Pulpo-Queso",            desc:"",                                          precio:4500, ico:"🐙",tipo:"emp"},
+    {id:"ef5", nm:"Jaiba-Queso",            desc:"",                                          precio:4200, ico:"🦀",tipo:"emp"},
+    {id:"ef6", nm:"Ostión Pil Pil-Queso",   desc:"",                                          precio:5300, ico:"🥟",tipo:"emp"},
+    {id:"ef7", nm:"Ostión-Queso Frita",     desc:"",                                          precio:5200, ico:"🥟",tipo:"emp"},
+    {id:"ef8", nm:"Pino de Marisco",        desc:"Surtido de mariscos",                       precio:3400, ico:"🥟",tipo:"emp"},
+    {id:"ef9", nm:"Ceviche-Queso",          desc:"Cebolla, cilantro, rocoto, fino corte de pescado",precio:3700,ico:"🍋",tipo:"emp"},
+    {id:"ef10",nm:"Pino Carne",             desc:"Carne picada",                              precio:3100, ico:"🥟",tipo:"emp"},
+    {id:"ef11",nm:"Mechada-Queso",          desc:"",                                          precio:3500, ico:"🥟",tipo:"emp"},
+    {id:"ef12",nm:"Longaniza-Queso",        desc:"Trozos de longaniza con queso",             precio:3300, ico:"🥟",tipo:"emp"},
+    {id:"ef13",nm:"Ají de Gallina Frita",   desc:"",                                          precio:3300, ico:"🌶️",tipo:"emp"},
+    {id:"ef14",nm:"Pastel de Choclo Frita", desc:"",                                          precio:3500, ico:"🌽",tipo:"emp"},
+    {id:"ef15",nm:"Pollo-Queso-Champiñón",  desc:"",                                          precio:3100, ico:"🐔",tipo:"emp"},
+    {id:"ef16",nm:"Carne-Champiñón-Queso",  desc:"",                                          precio:3100, ico:"🥟",tipo:"emp"},
+    {id:"ef17",nm:"Crema Pastelera Choclo", desc:"",                                          precio:3300, ico:"🌽",tipo:"emp"},
+    {id:"ef18",nm:"Queso",                  desc:"",                                          precio:2600, ico:"🧀",tipo:"emp"},
+    {id:"ef19",nm:"Champiñón-Queso",        desc:"",                                          precio:2600, ico:"🍄",tipo:"emp"},
+    {id:"ef20",nm:"Choclo-Crema-Queso",     desc:"",                                          precio:2600, ico:"🌽",tipo:"emp"},
+    {id:"ef21",nm:"Jamón-Queso",            desc:"",                                          precio:2700, ico:"🥟",tipo:"emp"},
+    {id:"ef22",nm:"Aceituna-Queso",         desc:"",                                          precio:2800, ico:"🫒",tipo:"emp"},
+    {id:"ef23",nm:"Pizza",                  desc:"Jamón, queso, tomate, aceitunas de Azapa",  precio:2900, ico:"🍕",tipo:"emp"},
+    {id:"ef24",nm:"Tilama",                 desc:"Queso de cabra, tomate y albahaca",         precio:3100, ico:"🧀",tipo:"emp"},
+  ],
+  empHorno:[
+    {id:"eh1", nm:"Pino Carne al Horno",             desc:"Carne picada",                     precio:3800, ico:"🫓",tipo:"emp"},
+    {id:"eh2", nm:"Mechada-Queso Horno",             desc:"",                                 precio:3800, ico:"🫓",tipo:"emp"},
+    {id:"eh3", nm:"Pollo-Queso Horno",               desc:"",                                 precio:3800, ico:"🐔",tipo:"emp"},
+    {id:"eh4", nm:"Pollo-Queso-Champiñón Horno",     desc:"",                                 precio:3800, ico:"🐔",tipo:"emp"},
+    {id:"eh5", nm:"Pastel de Choclo Horno",          desc:"",                                 precio:3800, ico:"🌽",tipo:"emp"},
+    {id:"eh6", nm:"Ají de Gallina Horno",            desc:"",                                 precio:3800, ico:"🌶️",tipo:"emp"},
+    {id:"eh7", nm:"Crema Pastelera Choclo Horno",    desc:"",                                 precio:3800, ico:"🌽",tipo:"emp"},
+    {id:"eh8", nm:"Queso al Horno",                  desc:"",                                 precio:3300, ico:"🧀",tipo:"emp"},
+    {id:"eh9", nm:"Camarón al Pil Pil Horno",        desc:"",                                 precio:4700, ico:"🦐",tipo:"emp"},
+    {id:"eh10",nm:"Las Sin Envidia — Pino Carne",    desc:"Versión horneada económica",       precio:2000, ico:"🫓",tipo:"emp",badge:"Económica",img:"empanadas_sin_envidia.png"},
+    {id:"eh11",nm:"Las Sin Envidia — Mechada Queso", desc:"Versión horneada económica",       precio:2000, ico:"🫓",tipo:"emp",badge:"Económica"},
+    {id:"eh12",nm:"Las Sin Envidia — Ají de Gallina",desc:"Versión horneada económica",       precio:2000, ico:"🌶️",tipo:"emp",badge:"Económica"},
+    {id:"eh13",nm:"Las Sin Envidia — Pastel Choclo", desc:"Versión horneada económica",       precio:2000, ico:"🌽",tipo:"emp",badge:"Económica"},
+    {id:"eh14",nm:"Las Sin Envidia — Pollo Queso",   desc:"Versión horneada económica",       precio:2000, ico:"🐔",tipo:"emp",badge:"Económica"},
+    {id:"eh15",nm:"Las Sin Envidia — Queso",         desc:"Versión horneada económica",       precio:2000, ico:"🧀",tipo:"emp",badge:"Económica"},
+    {id:"eh16",nm:"Pack Las Sin Envidia · 6 uds.",   desc:"Mechada, Ají, Choclo, Pollo, Pino, Queso",precio:11000,ico:"📦",tipo:"emp",badge:"Pack",img:"empanadas_sin_envidia.png"},
+  ],
+  pescados:[
+    {id:"p1", nm:"Reineta Frita o Plancha",    desc:"Con guarnición a elección",                       precio:18500,ico:"🐟"},
+    {id:"p2", nm:"Reineta de la Casa",         desc:"Plancha · Papa rosti · Tocino · Ensalada verde",  precio:19000,ico:"🐟"},
+    {id:"p3", nm:"Salmón a la Plancha",        desc:"Con guarnición a elección",                       precio:19000,ico:"🐠"},
+    {id:"p4", nm:"Corvina Frita o Plancha",    desc:"Con guarnición a elección",                       precio:19000,ico:"🐡"},
+    {id:"p5", nm:"Corvina de la Casa",         desc:"Plancha · Papa rosti · Tocino · Ensalada verde",  precio:20000,ico:"🐡"},
+    {id:"p6", nm:"Corvinilla Frita o Plancha", desc:"Con guarnición a elección",                       precio:16000,ico:"🐟"},
+    {id:"p7", nm:"Corvinilla de la Casa",      desc:"Plancha · Papa rosti · Tocino · Ensalada verde",  precio:16900,ico:"🐟"},
+    {id:"p8", nm:"Congrio Medallón",           desc:"Exquisito medallón frito",                        precio:19500,ico:"🐠"},
+    {id:"p9", nm:"Albacora Frita o Plancha",   desc:"Con guarnición a elección",                       precio:19500,ico:"🐠"},
+    {id:"p10",nm:"Dorado a la Plancha o Frito",desc:"Con arroz, ensalada chilena o papas fritas",      precio:20000,ico:"🐟"},
+    {id:"p11",nm:"Pejerrey Frito",             desc:"Rebozados en batido de la casa",                  precio:16000,ico:"🐟"},
+    {id:"p12",nm:"Pescado a lo Pobre",         desc:"",                                                precio:22000,ico:"🐟"},
+    {id:"p13",nm:"Perlán de Reineta",          desc:"",                                                precio:14500,ico:"🐟"},
+  ],
+  bebestibles:[
+    {id:"b1", nm:"Jugo Natural Mango o Maracuyá",desc:"Recién preparado",                             precio:4200,ico:"🥭",img:"bebestible.png"},
+    {id:"b2", nm:"Jugo Natural",               desc:"Melón, Sandía o Frutilla",                       precio:4000,ico:"🍓"},
+    {id:"b3", nm:"Jugo con Leche o Mixto Indi",desc:"",                                               precio:4400,ico:"🥛"},
+    {id:"b4", nm:"Limonada Tradicional",        desc:"",                                               precio:4000,ico:"🍋"},
+    {id:"b5", nm:"Limonada Menta-Jengibre",     desc:"",                                               precio:4200,ico:"🌿"},
+    {id:"b6", nm:"Pink Frozen",                desc:"Hielo frappé, limón, granadina",                 precio:4200,ico:"🩷"},
+    {id:"b7", nm:"Blue Frozen",                desc:"Hielo frappé, limón, curaçao, hierba buena",     precio:4200,ico:"💙"},
+    {id:"b8", nm:"Bebidas 350cc",              desc:"Coca Cola · Zero · Fanta · Sprite · Ginger Ale · Bilz · Pap",precio:2900,ico:"🥤"},
+    {id:"b9", nm:"Agua Sin Gas 600cc",          desc:"",                                               precio:2900,ico:"💧"},
+    {id:"b10",nm:"Agua Con Gas 600cc",          desc:"",                                               precio:2900,ico:"💧"},
+    {id:"b11",nm:"Red Bull Sabores",            desc:"Normal · Sandía · Yellow",                       precio:2800,ico:"⚡"},
+  ],
+  cervezas:[
+    {id:"c1", nm:"Austral Calafate 330cc",         desc:"",precio:3800,ico:"🍺"},
+    {id:"c2", nm:"Kunstmann Gran Torobayo 500cc",   desc:"",precio:6000,ico:"🍺"},
+    {id:"c3", nm:"Kunstmann Torobayo 330cc",        desc:"",precio:4000,ico:"🍺"},
+    {id:"c4", nm:"Kunstmann Lager 330cc",           desc:"",precio:4000,ico:"🍺"},
+    {id:"c5", nm:"Corona 330cc",                    desc:"",precio:3800,ico:"🍺"},
+    {id:"c6", nm:"Sol 330cc",                       desc:"",precio:3800,ico:"🌞"},
+    {id:"c7", nm:"Kunstmann Sin Alcohol 330cc",     desc:"",precio:3800,ico:"🍺"},
+    {id:"c8", nm:"Heineken Cero Alcohol",           desc:"",precio:3500,ico:"🍺"},
+    {id:"c9", nm:"Vaso Chelado",                    desc:"Zumo de limón y sal en el borde",precio:1300,ico:"🍻"},
+    {id:"c10",nm:"Vaso Michelado",                  desc:"Limón, merkén, sal, tabasco, salsa inglesa",precio:1500,ico:"🍻"},
+    {id:"c11",nm:"Vaso Tabasco",                    desc:"",precio:1700,ico:"🌶️"},
+  ],
+  delivery:[
+    {id:"dl1", nm:"Jarra Jugo Natural 1,5 Lt",      desc:"Maracuyá, Frutilla, Piña, Sandía o Melón",  precio:16500,ico:"🍹"},
+    {id:"dl2", nm:"Jarra Jugo Mango de Pica 1,5 Lt",desc:"Exclusivo delivery",                        precio:17000,ico:"🥭"},
+    {id:"dl3", nm:"Jugo Natural 1,0 Lt",             desc:"Mango o Maracuyá",                         precio:17000,ico:"🥭"},
+    {id:"dl4", nm:"Jugo Natural 1,0 Lt",             desc:"Frutilla, Piña, Melón o Sandía",           precio:16000,ico:"🍓"},
+    {id:"dl5", nm:"Jarra Limonada M-J 1,5 Lt",       desc:"Menta-Jengibre",                           precio:16000,ico:"🌿"},
+    {id:"dl6", nm:"Limonada Tradicional 1,0 Lt",     desc:"",                                         precio:15000,ico:"🍋"},
+    {id:"dl7", nm:"Limonada M-J 1,0 Lt",             desc:"Menta-Jengibre",                           precio:17000,ico:"🌿"},
+    {id:"dl8", nm:"Mojito Sabores 1,0 Lt",           desc:"Ron Havana, limón macerado, hierba buena",  precio:25000,ico:"🍹"},
+    {id:"dl9", nm:"Sour Peruano 1,0 Lt",             desc:"Barsol · Jugo de limón · Angostura",       precio:24500,ico:"🍋"},
+    {id:"dl10",nm:"Sour Nacional 1,0 Lt",            desc:"Capel · Azúcar flor · Jugo de limón",      precio:21000,ico:"🍋"},
+    {id:"dl11",nm:"Jarra Sangría 1,5 Lt",            desc:"Naranja, limón, canela, vino tinto, coñac", precio:15000,ico:"🍷"},
+    {id:"dl12",nm:"Jarra Borgoña 1,0 Lt",            desc:"Vino tinto, frutilla, azúcar, hielo",      precio:16000,ico:"🍷"},
+    {id:"dl13",nm:"Jarra Verano Maracuyá 1,0 Lt",    desc:"Vino blanco, maracuyá, yerba buena, limón", precio:17000,ico:"🍷"},
+  ],
+};
+
+const UPSELL = [
+  {id:"u1",nm:"Coca Cola Zero 350cc", precio:2900,ico:"🥤"},
+  {id:"u2",nm:"Bebida 350cc",         precio:2900,ico:"🥤"},
+  {id:"u3",nm:"Limonada Tradicional", precio:4000,ico:"🍋"},
+  {id:"u4",nm:"Jugo Natural Mango",   precio:4200,ico:"🥭"},
+  {id:"u5",nm:"Agua Sin Gas",         precio:2900,ico:"💧"},
+];
+
+/* ── STATE ── */
+const cart={};let upDone=false;const uSel=new Set();
+const $=id=>document.getElementById(id);
+const fmt=p=>"$"+p.toLocaleString("es-CL");
+const allP=()=>Object.values(MENU).flat();
+const getP=id=>allP().find(x=>x.id===id);
+
+/* ── RENDER DESTACADOS ── */
+function renderHero(){
+  $("heroRow").innerHTML=MENU.destacados.map(p=>{
+    const hasImg=p.img?true:false;
+    return `<div class="hcard" onclick="add('${p.id}')">
+      <div class="hcard-visual ${hasImg?'has-photo':''}">
+        ${hasImg?`<img src="${p.img}" alt="${p.nm}" loading="lazy">`:''}
+        ${!hasImg?p.ico:''}
+        <span class="hcard-badge">⭐ Popular</span>
+      </div>
+      <div class="hcard-body">
+        <div class="hcard-name">${p.nm}</div>
+        ${p.desc?`<div class="hcard-desc">${p.desc}</div>`:""}
+        <div class="hcard-foot">
+          <span class="hcard-price">${fmt(p.precio)}</span>
+          <button class="btn-add-h" onclick="event.stopPropagation();add('${p.id}')" aria-label="Agregar">+</button>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+/* ── RENDER LIST ── */
+function renderList(cid,arr){
+  $(cid).innerHTML=arr.map(p=>{
+    const icoHtml=p.img
+      ?`<div class="prow-ico"><img src="${p.img}" alt="${p.nm}" loading="lazy"></div>`
+      :`<div class="prow-ico">${p.ico}</div>`;
+    return `<div class="prow">
+      ${icoHtml}
+      <div class="prow-info">
+        <div class="prow-name">${p.nm}</div>
+        ${p.desc?`<div class="prow-desc">${p.desc}</div>`:""}
+        ${p.badge?`<span class="cbadge">${p.badge}</span>`:""}
+      </div>
+      <div class="prow-right">
+        <span class="prow-price">${fmt(p.precio)}</span>
+        <button class="btn-add" onclick="add('${p.id}')" aria-label="Agregar ${p.nm}">+</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function init(){
+  renderHero();
+  renderList("listEF",MENU.empFritas);
+  renderList("listEH",MENU.empHorno);
+  renderList("listPesc",MENU.pescados);
+  renderList("listBeb",MENU.bebestibles);
+  renderList("listCerv",MENU.cervezas);
+  renderList("listDel",MENU.delivery);
+}
+
+/* ── CART OPS ── */
+function add(id){
+  const p=getP(id);if(!p)return;
+  cart[id]?cart[id].qty++:(cart[id]={p,qty:1});
+  sync();toast("✓ "+p.nm);
+  if(p.tipo==="emp"&&!upDone){upDone=true;setTimeout(openUp,700);}
+}
+function rem(id){
+  if(!cart[id])return;cart[id].qty--;if(cart[id].qty<=0)delete cart[id];sync();
+}
+const sumN=()=>Object.values(cart).reduce((s,x)=>s+x.qty,0);
+const sumP=()=>Object.values(cart).reduce((s,x)=>s+x.p.precio*x.qty,0);
+
+function sync(){
+  const n=sumN(),t=sumP();
+  const b=$("badge");b.textContent=n;b.style.display=n?"flex":"none";
+  $("floatBar").className="float-bar"+(n?" on":"");
+  $("fbCount").textContent=n;$("fbTotal").textContent=fmt(t);
+  $("cartTotal").textContent=fmt(t);
+  renderCartBody();
+}
+
+function renderCartBody(){
+  const items=Object.values(cart);const el=$("cartBody");
+  if(!items.length){
+    el.innerHTML=`<div class="cart-empty"><div class="cart-empty-ico">🥟</div><p>Tu carrito está vacío.<br>¡Agrega algo delicioso!</p></div>`;
+    return;
+  }
+  el.innerHTML=items.map(x=>{
+    const icoHtml=x.p.img
+      ?`<div class="ci-ico"><img src="${x.p.img}" alt="${x.p.nm}"></div>`
+      :`<div class="ci-ico">${x.p.ico}</div>`;
+    return `<div class="cart-item">
+      ${icoHtml}
+      <div class="ci-inf">
+        <div class="ci-nm">${x.qty}× ${x.p.nm}</div>
+        <div class="ci-pr">${fmt(x.p.precio*x.qty)}</div>
+      </div>
+      <button class="btn-del" onclick="rem('${x.p.id}')">🗑</button>
+    </div>`;
+  }).join("");
+}
+
+/* ── CART DRAWER ── */
+function openCart(){$("cartDrawer").classList.add("on");$("ovCart").classList.add("on");}
+function closeCart(){$("cartDrawer").classList.remove("on");$("ovCart").classList.remove("on");}
+
+/* ── UPSELL ── */
+function openUp(){
+  uSel.clear();
+  $("uOpts").innerHTML=UPSELL.map(d=>`
+    <div class="uopt" id="uo-${d.id}" onclick="toggleU('${d.id}')">
+      <div class="uopt-ico">${d.ico}</div>
+      <div class="uopt-nm">${d.nm}</div>
+      <div class="uopt-pr">${fmt(d.precio)}</div>
+    </div>`).join("");
+  $("modalUp").classList.add("on");
+}
+function toggleU(id){
+  const el=$("uo-"+id);
+  uSel.has(id)?(uSel.delete(id),el.classList.remove("sel")):(uSel.add(id),el.classList.add("sel"));
+}
+function closeUp(){$("modalUp").classList.remove("on");}
+function confirmUp(){
+  uSel.forEach(id=>{
+    const d=UPSELL.find(x=>x.id===id);if(!d)return;
+    cart[id]?cart[id].qty++:(cart[id]={p:d,qty:1});
+  });
+  sync();closeUp();if(uSel.size)toast("🥤 Bebidas agregadas al pedido");
+}
+
+/* ── WHATSAPP ── */
+function enviarWA(){
+  const items=Object.values(cart);
+  if(!items.length){toast("⚠️ Tu carrito está vacío");return;}
+  const dir=$("addr").value.trim();
+  if(!dir){
+    $("addr").style.borderColor="var(--rojo)";$("addr").focus();
+    toast("📍 Ingresa tu dirección de despacho");
+    setTimeout(()=>$("addr").style.borderColor="",2500);return;
+  }
+  const t=sumP();
+  let msg="🏠 *PEDIDO DELIVERY — DOÑA FILOMENA*\n";
+  msg+="━━━━━━━━━━━━━━━━━━━━━━━━\n\n";
+  msg+="🛒 *Detalle del pedido:*\n";
+  items.forEach((x,i)=>{msg+=`  ${i+1}. ${x.qty}× ${x.p.nm}  →  ${fmt(x.p.precio*x.qty)}\n`;});
+  msg+=`\n━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+  msg+=`💰 *TOTAL: ${fmt(t)}*\n\n`;
+  msg+=`📍 *Dirección de despacho:*\n${dir}\n\n`;
+  msg+=`⏱️ _Confirmar disponibilidad y tiempo de entrega. ¡Gracias!_ 🙏`;
+  window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg));
+}
+
+/* ── NAV ── */
+function navTo(id,btn){
+  const el=$(id);if(!el)return;
+  window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-52,behavior:"smooth"});
+  document.querySelectorAll(".pill").forEach(p=>p.classList.remove("active"));
+  btn&&btn.classList.add("active");
+}
+const MSECS=["s-dest","s-ef","s-eh","s-pesc","s-beb","s-cerv","s-del"];
+window.addEventListener("scroll",()=>{
+  document.getElementById("header").classList.toggle("scrolled",window.scrollY>60);
+  const y=window.scrollY+130;let cur=0;
+  MSECS.forEach((id,i)=>{const el=$(id);if(el&&el.getBoundingClientRect().top+window.scrollY<=y)cur=i;});
+  document.querySelectorAll(".pill").forEach((p,i)=>p.classList.toggle("active",i===cur));
+},{passive:true});
+
+/* ── FADE-UP OBSERVER ── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible");});
+},{threshold:.1});
+document.querySelectorAll(".fade-up").forEach(el=>obs.observe(el));
+
+/* ── TOAST ── */
+let tTimer;
+function toast(msg){
+  const t=$("toast");t.textContent=msg;t.classList.add("on");
+  clearTimeout(tTimer);tTimer=setTimeout(()=>t.classList.remove("on"),2300);
+}
+
+init();
+</script>
+</body>
+</html>
